@@ -11,7 +11,7 @@
   "iot_class": "cloud_polling",
   "issue_tracker": "https://github.com/klejejs/ha-thermia-heat-pump-integration/issues",
   "requirements": [
-    "ThermiaOnlineAPI==6.3.1"
+    "ThermiaOnlineAPI@https://github.com/janfryauf/python-thermia-online-api/archive/8596b28e8b7b510ebb9ed4546c9366347ad7656c.tar.gz"
   ],
   "version": "1.0"
 }
