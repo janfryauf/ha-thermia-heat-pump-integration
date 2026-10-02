@@ -341,6 +341,22 @@ async def async_setup_entry(
                 )
             )
 
+        if heat_pump.cooling_operational_time is not None:
+            hass_thermia_sensors.append(
+                ThermiaGenericSensor(
+                    coordinator,
+                    idx,
+                    "is_online",
+                    "Cooling Operational Time",
+                    MDI_TIMER_COG_OUTLINE_ICON,
+                    EntityCategory.DIAGNOSTIC,
+                    None,
+                    "total_increasing",
+                    "cooling_operational_time",
+                    UnitOfTime.HOURS,
+                )
+            )
+
         if heat_pump.auxiliary_heater_1_operational_time is not None:
             hass_thermia_sensors.append(
                 ThermiaGenericSensor(

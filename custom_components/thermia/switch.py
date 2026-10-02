@@ -10,6 +10,7 @@ from .const import DOMAIN
 from .coordinator import ThermiaDataUpdateCoordinator
 from .switches.hot_water_switch import ThermiaHotWaterSwitch
 from .switches.hot_water_boost_switch import ThermiaHotWaterBoostSwitch
+from .switches.cooling_switch import ThermiaCoolingSwitch
 
 
 async def async_setup_entry(
@@ -29,5 +30,8 @@ async def async_setup_entry(
 
         if heat_pump.hot_water_boost_switch_state is not None:
             hass_thermia_switches.append(ThermiaHotWaterBoostSwitch(coordinator, idx))
+
+        if heat_pump.cooling_switch_state is not None:
+            hass_thermia_switches.append(ThermiaCoolingSwitch(coordinator, idx))
 
     async_add_entities(hass_thermia_switches)
