@@ -16,7 +16,10 @@ Platform | Description
 `water_heater` | Thermia Heat Pump integration
 `binary_sensor` | Operational and power status binary sensors
 `sensor` | Alarms sensor and different heat pump sensors
-`switch` | Hot water and hot water boost switches
+`switch` | Hot water, hot water boost and cooling switches
+`number` | Cooling target temperature
+
+Cooling entities (switch, target temperature, operational time) are only created when Thermia Online reports the cooling registers for your heat pump at setup. If you enable cooling on the heat pump later, restart Home Assistant to add them.
 `action`/`service` | Thermia action/service to generate debug file for issue reporting
 
 ## Supported heat pump models:
