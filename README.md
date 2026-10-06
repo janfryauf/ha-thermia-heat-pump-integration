@@ -49,4 +49,24 @@ Open HACS, go to the Integrations view and search for Thermia Heat Pump Integrat
 
 Sometimes Thermia updates their privacy policy which causes the Thermia API to throw errors when logging in. To fix the issue, please visit [https://online.thermia.se](https://online.thermia.se), log in, accept the privacy agreement and then try using the API again to see if it has fixed the issue. If not, please create a new bug report.
 
+### Values look stuck
+
+The diagnostic sensor **Last Online** shows when the heat pump last reported to Thermia Online. An iTec IQ, for example, reports about twice a minute. If Last Online is old, the heat pump (or its internet connection) has stopped reporting, and the other values stop updating. To detect it, for example in a template binary sensor with `delay_on` of a few minutes:
+
+```
+{{ not has_value('sensor.<heat pump>_last_online')
+   or now() - states('sensor.<heat pump>_last_online') | as_datetime > timedelta(minutes=15) }}
+```
+
+The `has_value` check makes it report a problem also when Home Assistant can't reach Thermia Online at all.
+
+Because Last Online changes a few times a minute, it fills the logbook and the device's activity list. To keep them readable, exclude it in `configuration.yaml` (templates and automations still see the current value):
+
+```yaml
+logbook:
+  exclude:
+    entities:
+      - sensor.<heat pump>_last_online
+```
+
 ## Contributions are welcome!
