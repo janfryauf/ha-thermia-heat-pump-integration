@@ -14,6 +14,7 @@ from .sensors.generic_sensor import ThermiaGenericSensor
 
 from .const import (
     DOMAIN,
+    MDI_CLOCK_CHECK_OUTLINE_ICON,
     MDI_TEMPERATURE_ICON,
     MDI_TIMER_COG_OUTLINE_ICON,
 )
@@ -386,6 +387,24 @@ async def async_setup_entry(
                     "total_increasing",
                     "auxiliary_heater_3_operational_time",
                     UnitOfTime.HOURS,
+                )
+            )
+
+        if heat_pump.last_online_utc is not None:
+            hass_thermia_sensors.append(
+                ThermiaGenericSensor(
+                    coordinator,
+                    idx,
+                    # Available whenever the time is known, also while the heat
+                    # pump is offline, which is when it matters most
+                    "last_online_utc",
+                    "Last Online",
+                    MDI_CLOCK_CHECK_OUTLINE_ICON,
+                    EntityCategory.DIAGNOSTIC,
+                    "timestamp",
+                    None,
+                    "last_online_utc",
+                    None,
                 )
             )
 
